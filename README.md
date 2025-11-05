@@ -7,3 +7,7 @@ The extension loads a typescript server plugin that actually patches the "go to 
 The logic is quite simple: When "go to definition" is launched, check if target is a function that matches RKT naming. Then after the target is resolved, search the target file for a function without the `use(lazy)` and `Query/Mutation` part.
 
 If the logic fails in some scenario, please create an issue and I'll have a look at it. PR:s are also welcome
+
+## development
+
+Best is to start a `npm watch` in the typescript server plugin folder, currently called `my-plugin`. It is necessary to have that part in a separate project, that is why we have that design.
