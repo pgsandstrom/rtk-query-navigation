@@ -45,6 +45,7 @@
   },
   "scripts": {
     "compile": "webpack",
+    "compile-plugin": "npm run build --prefix my-plugin",
     "compile-tests": "tsc -p . --outDir out",
     "format": "prettier --write \"{,!(.vscode-test|out|node_modules)/**/}!(package-lock).{json,md,js,jsx,ts,tsx,css,scss}\"",
     "lint": "eslint src",
