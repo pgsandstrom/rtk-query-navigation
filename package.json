@@ -1,10 +1,11 @@
 {
-  "name": "rtk-go-to-definition",
-  "displayName": "RTK Query: Improved go to definition",
-  "description": "",
+  "name": "rtk-query-navigation",
+  "displayName": "RTK Query Navigation",
+  "description": "Improved go to definition in RTK Query",
   "version": "0.0.1",
   "publisher": "codeandstuff",
   "license": "MIT",
+  "icon": "logo/icon.jpg",
   "engines": {
     "vscode": "^1.105.0"
   },
