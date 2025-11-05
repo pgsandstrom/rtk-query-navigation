@@ -31,13 +31,24 @@
       }
     ]
   },
+  "lint-staged": {
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "node ./node_modules/eslint/bin/eslint.js --fix",
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "compile": "webpack",
     "compile-tests": "tsc -p . --outDir out",
     "format": "prettier --write \"{,!(.vscode|.vscode-test|out|node_modules)/**/}!(package-lock).{json,md,js,jsx,ts,tsx,css,scss}\"",
     "lint": "eslint src",
     "package": "vsce package",
-    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "pre-commit": "lint-staged",
+    "pre-push": "npm run lint && npm run typecheck && npm run test",
+    "prepare": "husky",
     "test": "vscode-test",
     "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
     "watch": "webpack --watch",
@@ -47,19 +58,21 @@
     "my-plugin": "file:./my-plugin"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.10",
-    "@types/node": "22.x",
-    "@types/vscode": "^1.105.0",
-    "@typescript-eslint/eslint-plugin": "^8.45.0",
-    "@typescript-eslint/parser": "^8.45.0",
-    "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.19.0",
+    "@types/vscode": "1.105.0",
+    "@typescript-eslint/eslint-plugin": "8.45.0",
+    "@typescript-eslint/parser": "8.45.0",
+    "@vscode/test-cli": "0.0.12",
+    "@vscode/test-electron": "2.5.2",
     "@vscode/vsce": "3.6.2",
-    "eslint": "^9.36.0",
+    "eslint": "9.36.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.6",
     "prettier": "3.6.2",
-    "ts-loader": "^9.5.4",
-    "typescript": "^5.9.3",
-    "webpack": "^5.102.0",
-    "webpack-cli": "^6.0.1"
+    "ts-loader": "9.5.4",
+    "typescript": "5.9.3",
+    "webpack": "5.102.1",
+    "webpack-cli": "6.0.1"
   }
 }
