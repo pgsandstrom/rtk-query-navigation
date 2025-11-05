@@ -10,4 +10,7 @@ If the logic fails in some scenario, please create an issue and I'll have a look
 
 ## development
 
-Best is to start a `npm watch` in the typescript server plugin folder, currently called `my-plugin`. It is necessary to have that part in a separate project, that is why we have that design.
+Getting the new version of the plugin into the extension is a mess. When building we must use a tarball as dependency, and then the hash of the file is saved in the lockfile and aggressively cached.
+We must use tarball since "normal" install ends up being a symlink that VSIX dont support. And currently npm10 have issues with not symlinking dependencies.
+Maybe the best current hax would be to change the tarball filename on each compile, and modify the dependency in package.json. But that is also ugly.
+Currently I just do some manual work, like deleting the lockfile. TODO: fix something.

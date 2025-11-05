@@ -1,10 +1,10 @@
+.husky/**
 .vscode/**
 .vscode-test/**
 src/**
+/test/**
 .gitignore
-.yarnrc
-webpack.config.js
-vsc-extension-quickstart.md
+prettier.config.js
 **/tsconfig.json
 **/eslint.config.mjs
 **/*.map

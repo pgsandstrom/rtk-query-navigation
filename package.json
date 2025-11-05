@@ -44,8 +44,7 @@
     ]
   },
   "scripts": {
-    "compile": "webpack",
-    "compile-plugin": "npm run build --prefix my-plugin",
+    "compile": "npm run build --prefix my-plugin && tsc -p ./",
     "compile-tests": "tsc -p . --outDir out",
     "format": "prettier --write \"{,!(.vscode-test|out|node_modules)/**/}!(package-lock).{json,md,js,jsx,ts,tsx,css,scss}\"",
     "lint": "eslint src",
@@ -54,12 +53,12 @@
     "pre-push": "npm run lint && npm run typecheck && npm run test",
     "prepare": "husky",
     "test": "vscode-test",
-    "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
-    "watch": "webpack --watch",
+    "vscode:prepublish": "npm run compile",
+    "watch": "tsc -watch -p ./",
     "watch-tests": "tsc -p . -w --outDir out"
   },
   "dependencies": {
-    "my-plugin": "file:./my-plugin"
+    "my-plugin": "file:./my-plugin/my-plugin-0.0.1.tgz"
   },
   "devDependencies": {
     "@types/mocha": "10.0.10",
@@ -75,8 +74,6 @@
     "lint-staged": "16.2.6",
     "prettier": "3.6.2",
     "ts-loader": "9.5.4",
-    "typescript": "5.9.3",
-    "webpack": "5.102.1",
-    "webpack-cli": "6.0.1"
+    "typescript": "5.9.3"
   }
 }
