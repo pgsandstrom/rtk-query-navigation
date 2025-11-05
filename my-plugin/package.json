@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc && npm pack",
+    "typecheck": "tsc --noEmit",
     "watch": "nodemon --exec \"tsc && npm pack\" -e ts"
   },
   "dependencies": {

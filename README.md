@@ -14,5 +14,6 @@ Getting the new version of the plugin into the extension is a mess. When buildin
 We must use tarball since "normal" install ends up being a symlink that VSIX dont support. And currently npm10 have issues with not symlinking dependencies.
 Maybe the best current hax would be to change the tarball filename on each compile, and modify the dependency in package.json. But that is also ugly.
 Currently I just do some manual work, like deleting the lockfile. TODO: fix something.
+Conclusion: The cache is super hard to bust. We need to do the rename thing, even if it will create a bunch of ugly git diffs.
 
 The whole build-process feels quite fragile, and I wonder if it will break if we include other dependencies. If so, make sure to dig into the .vscodeignore file.

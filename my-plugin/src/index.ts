@@ -33,7 +33,7 @@ function init(modules: { typescript: typeof import('typescript/lib/tsserverlibra
       }
 
       const tmpBase = m[2] as string | undefined
-      if (!tmpBase) {
+      if (tmpBase === undefined) {
         return normalResult
       }
       const base = tmpBase.charAt(0).toLowerCase() + tmpBase.slice(1)
@@ -43,7 +43,7 @@ function init(modules: { typescript: typeof import('typescript/lib/tsserverlibra
 
       // Use the first TS definition target file as the search file
       const defFile = normalResult?.definitions?.[0]?.fileName
-      if (!defFile) {
+      if (defFile === undefined) {
         return normalResult
       }
 
@@ -90,6 +90,7 @@ function createLanguageServiceProxy(oldLanguageService: ts.LanguageService) {
   const proxy: ts.LanguageService = Object.create(null)
   for (const k of Object.keys(oldLanguageService) as (keyof ts.LanguageService)[]) {
     const orig = oldLanguageService[k]
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     proxy[k] = (...args: any[]) => (orig as any).apply(oldLanguageService, args)
   }
   return proxy
@@ -150,10 +151,7 @@ function getCallIdentifier(
   ) {
     return node.name
   }
-  if (node.parent) {
-    return getCallIdentifier(node.parent, ts)
-  }
-  return
+  return getCallIdentifier(node.parent, ts)
 }
 
 export = init

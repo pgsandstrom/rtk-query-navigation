@@ -2,7 +2,7 @@
   "name": "rtk-query-navigation",
   "displayName": "RTK Query Navigation",
   "description": "Improved go to definition in RTK Query",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "codeandstuff",
   "license": "MIT",
   "icon": "logo/icon.jpg",
@@ -48,12 +48,13 @@
     "compile": "npm run build --prefix my-plugin && tsc -p ./",
     "compile-tests": "tsc -p . --outDir out",
     "format": "prettier --write \"{,!(.vscode-test|out|node_modules)/**/}!(package-lock).{json,md,js,jsx,ts,tsx,css,scss}\"",
-    "lint": "eslint src",
+    "lint": "eslint --ext .ts --ext .tsx --fix src my-plugin/src",
     "package": "vsce package",
     "pre-commit": "lint-staged",
     "pre-push": "npm run lint && npm run typecheck && npm run test",
     "prepare": "husky",
     "test": "vscode-test",
+    "typecheck": "npm run typecheck --prefix my-plugin && tsc --noEmit",
     "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./",
     "watch-tests": "tsc -p . -w --outDir out"
@@ -71,10 +72,13 @@
     "@vscode/test-electron": "2.5.2",
     "@vscode/vsce": "3.6.2",
     "eslint": "9.36.0",
+    "eslint-plugin-no-only-tests": "3.3.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "9.1.7",
     "lint-staged": "16.2.6",
     "prettier": "3.6.2",
     "ts-loader": "9.5.4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.2"
   }
 }
