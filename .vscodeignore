@@ -3,6 +3,7 @@
 .vscode-test/**
 src/**
 /test/**
+out/test/**
 .gitignore
 prettier.config.js
 **/tsconfig.json
@@ -10,3 +11,8 @@ prettier.config.js
 **/*.map
 **/*.ts
 **/.vscode-test.*
+
+# we want to exclude the my-plugin source while keeping it as a dependency
+my-plugin/**
+node_modules
+!node_modules/my-plugin
