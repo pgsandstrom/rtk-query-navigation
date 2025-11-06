@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "publisher": "codeandstuff",
   "license": "MIT",
-  "icon": "logo/icon.jpg",
+  "icon": "logo/logo.png",
   "engines": {
     "vscode": "^1.105.0"
   },
