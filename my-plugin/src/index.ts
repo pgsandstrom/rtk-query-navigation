@@ -131,28 +131,12 @@ function getCallIdentifier(
   if (!node) {
     return
   }
-  // On identifier itself in a call expression
-  if (
-    ts.isIdentifier(node) &&
-    ts.isCallExpression(node.parent) &&
-    node.parent.expression === node
-  ) {
-    return node
-  }
-  // On call expression somewhere inside
+  // Lets say we have `useMyCallquery()` and we are on the opening parenthesis. Then this check will make it work.
   if (ts.isCallExpression(node) && ts.isIdentifier(node.expression)) {
     return node.expression
   }
-  // Maybe on property access: obj.foo()
-  if (
-    ts.isPropertyAccessExpression(node) &&
-    ts.isIdentifier(node.name) &&
-    ts.isCallExpression(node.parent)
-  ) {
-    return node.name
-  }
-  // Handle import declarations (i.e. `import { useMyCallQuery } from './api.ts')
-  if (ts.isIdentifier(node) && ts.isImportSpecifier(node.parent)) {
+  // Otherwise we just settle for the first node (going up the parents) that is an identifier.
+  if (ts.isIdentifier(node)) {
     return node
   }
   return getCallIdentifier(node.parent, ts)
