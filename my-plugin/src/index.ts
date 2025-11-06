@@ -131,7 +131,7 @@ function getCallIdentifier(
   if (!node) {
     return
   }
-  // On identifier itself
+  // On identifier itself in a call expression
   if (
     ts.isIdentifier(node) &&
     ts.isCallExpression(node.parent) &&
@@ -150,6 +150,10 @@ function getCallIdentifier(
     ts.isCallExpression(node.parent)
   ) {
     return node.name
+  }
+  // Handle import declarations (i.e. `import { useMyCallQuery } from './api.ts')
+  if (ts.isIdentifier(node) && ts.isImportSpecifier(node.parent)) {
+    return node
   }
   return getCallIdentifier(node.parent, ts)
 }
