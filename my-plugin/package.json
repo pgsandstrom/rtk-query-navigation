@@ -8,10 +8,11 @@
   },
   "scripts": {
     "build": "tsc && npm pack",
-    "typecheck": "tsc --noEmit",
-    "watch": "nodemon --exec \"tsc && npm pack\" -e ts"
+    "test": "node --test --import tsx \"src/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "nodemon": "3.1.10"
+    "nodemon": "3.1.10",
+    "tsx": "4.20.6"
   }
 }

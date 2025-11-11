@@ -40,7 +40,7 @@
       "prettier --write"
     ],
     "*.{ts,tsx}": [
-      "node ./node_modules/eslint/bin/eslint.js --fix",
+      "node ./node_modules/eslint/bin/eslint.js --fix --no-warn-ignored",
       "prettier --write"
     ]
   },
@@ -53,7 +53,7 @@
     "pre-commit": "lint-staged",
     "pre-push": "npm run lint && npm run typecheck && npm run test",
     "prepare": "husky",
-    "test": "vscode-test",
+    "test": "npm run test --prefix my-plugin",
     "typecheck": "npm run typecheck --prefix my-plugin && tsc --noEmit",
     "vscode:prepublish": "npm run compile",
     "watch": "tsc -watch -p ./",

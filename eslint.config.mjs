@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: [],
+    ignores: ['my-plugin/src/rtk_test_file.ts'],
   },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,

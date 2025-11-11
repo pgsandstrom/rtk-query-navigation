@@ -1,5 +1,7 @@
 import type ts from 'typescript/lib/tsserverlibrary'
 
+import { firstWholeWordIndex } from './util'
+
 function init(modules: { typescript: typeof import('typescript/lib/tsserverlibrary') }) {
   const ts = modules.typescript
 
@@ -94,17 +96,6 @@ function createLanguageServiceProxy(oldLanguageService: ts.LanguageService) {
     proxy[k] = (...args: any[]) => (orig as any).apply(oldLanguageService, args)
   }
   return proxy
-}
-
-function firstWholeWordIndex(haystack: string, word: string): number {
-  // word boundary for TS identifiers (letters/digits/_/$), not using \b (bad with _/$)
-  const esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const rx = new RegExp(`(^|[^$_0-9A-Za-z])(${esc})(?![$_0-9A-Za-z])`, 'm')
-  const m = rx.exec(haystack)
-  if (!m) {
-    return -1
-  }
-  return m.index + (m[1] ? m[1].length : 0)
 }
 
 function findTokenAt(
