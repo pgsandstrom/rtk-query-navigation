@@ -18,3 +18,5 @@ The whole build-process feels quite fragile, and I wonder if it will break if we
 I have now added a script "compile-and-load-plugin" that should always succeed in inserting the latest version of the plugin into the extension. Just run it and F5 in vscode to test it.
 
 Another thing of note: You can add "console.log()" stuff in the plugin. But then you have to run "Open TS Server log" to actually see the log.
+
+DO NOTE: Please increase the version of the plugin before every release. Or it might be cached in some super strange way.

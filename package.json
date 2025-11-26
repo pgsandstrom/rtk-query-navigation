@@ -2,7 +2,7 @@
   "name": "rtk-query-navigation",
   "displayName": "RTK Query Navigation",
   "description": "Improved go to definition in RTK Query",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "codeandstuff",
   "license": "MIT",
   "icon": "logo/logo.png",
@@ -60,7 +60,7 @@
     "watch-tests": "tsc -p . -w --outDir out"
   },
   "dependencies": {
-    "my-plugin": "file:./my-plugin/my-plugin-0.0.1.tgz"
+    "my-plugin": "file:./my-plugin/my-plugin-0.0.2.tgz"
   },
   "devDependencies": {
     "@types/mocha": "10.0.10",

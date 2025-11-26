@@ -4,6 +4,10 @@ All notable changes to the "RTK Query Navigation" extension will be documented i
 
 ## Unreleased changes
 
+## 1.1.2
+
+- Last version didnt include fix
+
 ## 1.1.1
 
 - Fix handling of some regexps
