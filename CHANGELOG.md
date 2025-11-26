@@ -4,6 +4,10 @@ All notable changes to the "RTK Query Navigation" extension will be documented i
 
 ## Unreleased changes
 
+## 1.1.1
+
+- Fix handling of some regexps
+
 ## 1.1.0
 
 - Polish logic for identifying correct position of "go to definition"
