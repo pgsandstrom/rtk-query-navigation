@@ -8,6 +8,15 @@ here is a template that mentions foobar
     foobar: builder.query<boolean, void>({
 `
 
+/**
+ * Here is a comment that mentions 
+ *   foobar: builder.query<boolean, void>({
+ */
+
+// Here is ANOTHER comment that mentions foobar: builder.query<boolean, void>({
+
+const disturbingRegexp = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(disposition)
+
 foobar.charAt(1)
 
 export const authApi = createApi({
@@ -17,7 +26,7 @@ export const authApi = createApi({
     foobarSimilar: () => {},
     /* foobar */
     // foobar: builder.query<boolean, void>({
-    foobar: builder.query<boolean, void>({ // CORRECT
+    foobar: builder.query<boolean, void>({
       query: () => ({ url: '/whatever', timeout: 5000 }),
     }),
     foobar2: builder.query<boolean, void>({

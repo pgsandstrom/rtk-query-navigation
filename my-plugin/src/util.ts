@@ -1,3 +1,5 @@
+// A word of warning: This is AI-genereated slop.
+
 export function firstWholeWordIndex(rawFileContent: string, word: string): number {
   const fileContent = maskStringsAndComments(rawFileContent)
   // word boundary for TS identifiers (letters/digits/_/$), not using \b (bad with _/$)
@@ -43,10 +45,10 @@ function maskStringsAndComments(src: string): string {
 
   const skipEscapes = () => {
     i += 2
-  } // assumes src[i] === '\\'
+  }
 
   const skipQuoted = (quote: "'" | '"') => {
-    i++ // past opening quote
+    i++
     while (i < n) {
       const c = src[i]
       if (c === '\\') {
@@ -74,6 +76,29 @@ function maskStringsAndComments(src: string): string {
       i++
     }
     i = Math.min(n, i + 2)
+  }
+
+  const skipRegex = () => {
+    i++ // past opening /
+    while (i < n) {
+      const c = src[i]
+      if (c === '\\') {
+        skipEscapes()
+        continue
+      }
+      if (c === '/') {
+        i++ // past closing /
+        // skip flags (g, i, m, etc.)
+        while (i < n && /[a-z]/i.test(src[i])) {
+          i++
+        }
+        break
+      }
+      if (c === '\n') {
+        break
+      } // invalid regex
+      i++
+    }
   }
 
   const skipTemplate = () => {
@@ -139,6 +164,26 @@ function maskStringsAndComments(src: string): string {
   while (i < n) {
     const c = src[i]
     const c2 = src[i + 1]
+
+    // Check for regex before checking for comments
+    // Regex can appear after: =, (, [, {, :, ;, !, &, |, ?, +, -, *, /, %, ,, return, throw, etc.
+    if (c === '/') {
+      const prevNonWs = i - 1
+      let j = prevNonWs
+      while (j >= 0 && /\s/.test(src[j])) {
+        j--
+      }
+
+      const prevChar = j >= 0 ? src[j] : ''
+      const isRegexContext = j < 0 || /[=([{:;!&|?+\-*/%,]/.test(prevChar)
+
+      if (isRegexContext && c2 !== '/' && c2 !== '*') {
+        const start = i
+        skipRegex()
+        spaceRange(start, i)
+        continue
+      }
+    }
 
     // // line comment
     if (c === '/' && c2 === '/') {

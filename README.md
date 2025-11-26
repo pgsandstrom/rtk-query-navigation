@@ -12,8 +12,9 @@ If the logic fails in some scenario, please create an issue and I'll have a look
 
 Getting the new version of the plugin into the extension is a mess. When building we must use a tarball as dependency, and then the hash of the file is saved in the lockfile and aggressively cached.
 We must use tarball since "normal" install ends up being a symlink that VSIX dont support. And currently npm10 have issues with not symlinking dependencies.
-Maybe the best current hax would be to change the tarball filename on each compile, and modify the dependency in package.json. But that is also ugly.
-Currently I just do some manual work, like deleting the lockfile. TODO: fix something.
-Conclusion: The cache is super hard to bust. We need to do the rename thing, even if it will create a bunch of ugly git diffs.
 
 The whole build-process feels quite fragile, and I wonder if it will break if we include other dependencies. If so, make sure to dig into the .vscodeignore file.
+
+I have now added a script "compile-and-load-plugin" that should always succeed in inserting the latest version of the plugin into the extension. Just run it and F5 in vscode to test it.
+
+Another thing of note: You can add "console.log()" stuff in the plugin. But then you have to run "Open TS Server log" to actually see the log.
